@@ -59,5 +59,25 @@ namespace SapphTools.LogLookup.Setup.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /****** LINES 10 and 12 may have to be altered to meet the specifics of your SQL Server installation *****/
+        ////****** Requires SQL Server 2016 / Compatibility Level 130 *****/
+        ///
+        ///USE [master]
+        ///GO
+        ////****** Object:  Database [EUDLogging]    Script Date: 9/21/2023 11:33:57 AM ******/
+        ///CREATE DATABASE [EUDLogging]
+        /// CONTAINMENT = NONE
+        /// ON  PRIMARY 
+        ///( NAME = N&apos;EUDLogging&apos;, SIZE = 2957312KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+        /// LOG ON 
+        ///( NAME = N&apos;EUDLogging_log&apos;, SIZE = 1843200KB , MAXSIZE = 2048GB , FILEGROWTH  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string EUDLogging {
+            get {
+                return ResourceManager.GetString("EUDLogging", resourceCulture);
+            }
+        }
     }
 }
