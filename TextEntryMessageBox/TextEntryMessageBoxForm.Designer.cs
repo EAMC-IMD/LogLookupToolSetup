@@ -24,64 +24,65 @@ namespace SapphTools.Utils.UX {
         /// the contents of method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            components = new System.ComponentModel.Container();
-            panelIcon = new System.Windows.Forms.Panel();
-            imageListIcons = new System.Windows.Forms.ImageList(components);
-            buttonToolTip = new System.Windows.Forms.ToolTip(components);
-            rtbMessage = new System.Windows.Forms.RichTextBox();
-            inputBox = new System.Windows.Forms.TextBox();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextEntryMessageBoxForm));
+            this.panelIcon = new System.Windows.Forms.Panel();
+            this.imageListIcons = new System.Windows.Forms.ImageList(this.components);
+            this.buttonToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.rtbMessage = new System.Windows.Forms.RichTextBox();
+            this.inputBox = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
             // 
             // panelIcon
             // 
-            panelIcon.BackColor = System.Drawing.Color.Transparent;
-            panelIcon.Location = new System.Drawing.Point(11, 10);
-            panelIcon.Name = "panelIcon";
-            panelIcon.Size = new System.Drawing.Size(45, 39);
-            panelIcon.TabIndex = 3;
-            panelIcon.Visible = false;
+            this.panelIcon.BackColor = System.Drawing.Color.Transparent;
+            this.panelIcon.Location = new System.Drawing.Point(11, 10);
+            this.panelIcon.Name = "panelIcon";
+            this.panelIcon.Size = new System.Drawing.Size(45, 39);
+            this.panelIcon.TabIndex = 3;
+            this.panelIcon.Visible = false;
             // 
             // imageListIcons
             // 
-            imageListIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
-            imageListIcons.ImageSize = new System.Drawing.Size(32, 32);
-            imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListIcons.ImageStream")));
+            this.imageListIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListIcons.Images.SetKeyName(0, "11.png");
             // 
             // rtbMessage
             // 
-            rtbMessage.BackColor = System.Drawing.SystemColors.Control;
-            rtbMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            rtbMessage.Location = new System.Drawing.Point(280, 10);
-            rtbMessage.Name = "rtbMessage";
-            rtbMessage.ReadOnly = true;
-            rtbMessage.Size = new System.Drawing.Size(140, 58);
-            rtbMessage.TabIndex = 4;
-            rtbMessage.Text = "";
-            rtbMessage.Visible = false;
+            this.rtbMessage.BackColor = System.Drawing.SystemColors.Control;
+            this.rtbMessage.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtbMessage.Location = new System.Drawing.Point(280, 10);
+            this.rtbMessage.Name = "rtbMessage";
+            this.rtbMessage.ReadOnly = true;
+            this.rtbMessage.Size = new System.Drawing.Size(140, 58);
+            this.rtbMessage.TabIndex = 4;
+            this.rtbMessage.Text = "";
+            this.rtbMessage.Visible = false;
             // 
             // inputBox
             // 
-            inputBox.Location = new System.Drawing.Point(16, 105);
-            inputBox.Name = "inputBox";
-            inputBox.Size = new System.Drawing.Size(73, 24);
-            inputBox.TabIndex = 5;
-            inputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(inputBox_KeyPress);
+            this.inputBox.Location = new System.Drawing.Point(16, 105);
+            this.inputBox.Name = "inputBox";
+            this.inputBox.Size = new System.Drawing.Size(73, 24);
+            this.inputBox.TabIndex = 5;
+            this.inputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputBox_KeyPress);
             // 
             // TextEntryMessageBoxForm
             // 
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            ClientSize = new System.Drawing.Size(322, 224);
-            Controls.Add(inputBox);
-            Controls.Add(rtbMessage);
-            Controls.Add(panelIcon);
-            Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
-            MinimizeBox = false;
-            Name = "TextEntryMessageBoxForm";
-            StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(322, 224);
+            this.Controls.Add(this.inputBox);
+            this.Controls.Add(this.rtbMessage);
+            this.Controls.Add(this.panelIcon);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "TextEntryMessageBoxForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
