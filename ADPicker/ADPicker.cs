@@ -10,6 +10,7 @@ namespace SapphTools.Utils.UX {
         private bool _ouOnly = false;
         private readonly ArrayList alExceptions = new ArrayList(2);
         private ADHelper adh;
+        private string _siteCode;
         public bool OUOnly {
             get => _ouOnly;
             set => _ouOnly = value;
@@ -17,15 +18,15 @@ namespace SapphTools.Utils.UX {
         public string ADsPath {
             get { return _adspath; }
         }
-        public ADPicker() {
-            InitializeComponent();
-            alExceptions.Add("OU=Domain Controllers");
-            alExceptions.Add("CN=Computers");
-            alExceptions.Add("OU=Computers");
-            _ouOnly = false;
+        public string SiteCode {
+            get => _siteCode;
+            set => _siteCode = value;
         }
-        public ADPicker(bool ouOnly) {
+        public ADPicker() : this("", false) {}
+        public ADPicker(bool ouOnly) : this("", ouOnly) {}
+        public ADPicker(string sitecode, bool ouOnly) {
             _ouOnly = ouOnly;
+            _siteCode = sitecode;
             InitializeComponent();
 
             alExceptions.Add("OU=Domain Controllers");
@@ -33,30 +34,27 @@ namespace SapphTools.Utils.UX {
             alExceptions.Add("OU=Computers");
         }
         private void ADPicker_Load(object sender, EventArgs e) {
-            TreeNode parentNode = new TreeNode("Root") {
-                Tag = ""
+            TreeNode parentNode = new TreeNode($"LDAP://OU={_siteCode},OU=DoD,DC=med,DC=ds,DC=osd,DC=mil") {
+                Tag = $"LDAP://OU={_siteCode},OU=DoD,DC=med,DC=ds,DC=osd,DC=mil"
             };
             treeView1.Nodes.Add(parentNode);
             AddTreeNodes(parentNode);
             treeView1.Nodes[0].Expand();
-
-            foreach (TreeNode childNode in parentNode.Nodes)
-                AddTreeNodes(childNode);
         }
-
         private void AddTreeNodes(TreeNode node) {
             Cursor.Current = Cursors.WaitCursor;
             treeView1.BeginUpdate();
             adh = new ADHelper();
             adh.GetChildEntries((string)node.Tag, _ouOnly);
             foreach (var child in adh.Children) {
-                TreeNode childNode = new TreeNode(child.Key) {
-                    Tag = child.Value
+                TreeNode childNode = new TreeNode(child.Name) {
+                    Tag = child.Path,
+                    Name = child.Path
                 };
                 node.Nodes.Add(childNode);
                 if (!alExceptions.Contains(node.Text))
                     childNode.ImageIndex =
-                        SetImageIndex(child.Key.Substring(0, 2));
+                        SetImageIndex(child.Name.Substring(0, 2));
                 else
                     childNode.ImageIndex = 3;
             }
@@ -64,8 +62,11 @@ namespace SapphTools.Utils.UX {
             Cursor.Current = Cursors.Default;
         }
         private void TreeView1_AfterExpand(object sender, TreeViewEventArgs e) {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             foreach (TreeNode childNode in e.Node.Nodes)
                 AddTreeNodes(childNode);
+            watch.Stop();
+            System.Diagnostics.Debug.WriteLine($"Tree expansion, foreach, {e.Node.Tag} :: {e.Node.Text} " + watch.ElapsedMilliseconds.ToString() + "ms");
         }
         private void TreeView1_AfterSelect(object sender, TreeViewEventArgs e) {
             _adspath = (string)e.Node.Tag;

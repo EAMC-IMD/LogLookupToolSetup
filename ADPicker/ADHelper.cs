@@ -1,17 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.DirectoryServices;
+using System.Linq;
 
 namespace SapphTools.Utils.UX {
     internal class ADHelper {
         #region fields
-        private Hashtable _htChildren = new Hashtable();
-        private Dictionary<string, string> _children = new Dictionary<string, string>();
+        private List<DirectoryEntry> _children = new List<DirectoryEntry>();
         private DirectoryEntry entry;
         #endregion
 
         #region properties
-        public Dictionary<string, string> Children {
+        public List<DirectoryEntry> Children {
             get { return _children; }
         }
         #endregion
@@ -32,9 +32,26 @@ namespace SapphTools.Utils.UX {
                 entry = new DirectoryEntry(adspath);
             else
                 entry = new DirectoryEntry();
+            if (ouOnly)
+                _children = entry.Children
+                    .OfType<DirectoryEntry>()
+                    .Where(s => s.SchemaClassName == "organizationalUnit")
+                    .ToList();
+            else
+                _children = entry.Children
+                    .OfType<DirectoryEntry>()
+                    .ToList();
+        }
+        public void GetChildEntriesForEach(string adspath, bool ouOnly) {
+            if (adspath.Length > 0)
+                entry = new DirectoryEntry(adspath);
+            else
+                entry = new DirectoryEntry();
             foreach (DirectoryEntry childEntry in entry.Children) {
-                if (ouOnly && childEntry.SchemaClassName == "container")
-                    _children.Add(childEntry.Name, childEntry.Path);
+                if (ouOnly && childEntry.SchemaClassName == "organizationalUnit")
+                    _children.Add(childEntry);
+                else if (!ouOnly)
+                    _children.Add(childEntry);
             }
         }
         #endregion
