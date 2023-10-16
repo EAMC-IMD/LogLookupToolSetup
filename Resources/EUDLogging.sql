@@ -474,7 +474,7 @@ BEGIN
 	IF LEN(@ecn)=5 BEGIN 
 		SET @ecn = '0' + @ecn 
 	END
-	SELECT @DMLSS_SN = MfrSerialNo FROM [pcInventory].[dbo].[DMLSS] WHERE Ecn=@ecn
+	SELECT @DMLSS_SN = MfrSerialNo FROM [DMLSS] WHERE Ecn=@ecn
 	IF @DMLSS_SN IS NULL RETURN 'DMLSS error'
 	IF (LEN(@DMLSS_SN)>50) BEGIN
 		SET @MAX_LEN = 50
