@@ -300,7 +300,9 @@
     <Compile Include="TextEntryMessageBox\TextEntryMessageBoxForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TextEntryMessageBox\TextEntryMessageBoxForm.Designer.cs" />
+    <Compile Include="TextEntryMessageBox\TextEntryMessageBoxForm.Designer.cs">
+      <DependentUpon>TextEntryMessageBoxForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextEntryMessageBox\TextEntryMessageBoxIcon.cs" />
     <Compile Include="TextEntryMessageBox\TextEntryMessageBoxManager.cs" />
     <Compile Include="TextEntryMessageBox\TextEntryMessageBoxResult.cs" />
@@ -321,7 +323,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TextEntryMessageBox\TextEntryMessageBoxForm.resx" />
+    <EmbeddedResource Include="TextEntryMessageBox\TextEntryMessageBoxForm.resx">
+      <DependentUpon>TextEntryMessageBoxForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
